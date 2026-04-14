@@ -1,0 +1,93 @@
+erDiagram
+    PERFIL_ACESSO ||--o{ USUARIO : possui
+    USUARIO ||--o{ CONTA : possui
+    USUARIO ||--o{ AUTENTICACAO : realiza
+    CONTA ||--|| CARTEIRA : possui
+    CARTEIRA ||--o{ SALDO : registra
+    ATIVO_CRIPTO ||--o{ SALDO : compoe
+    CONTA ||--o{ TRANSACAO : realiza
+    TRANSACAO ||--o{ LOG_AUDITORIA : gera
+    CONTA ||--o{ ALERTA : gera
+
+    PERFIL_ACESSO {
+        int id_perfil
+        string nome_perfil
+        string descricao
+    }
+
+    USUARIO {
+        int id_usuario
+        string nome
+        string email
+        string senha_hash
+        string status
+        string data_criacao
+        int id_perfil
+    }
+
+    AUTENTICACAO {
+        int id_autenticacao
+        string metodo_mfa
+        string ultimo_login
+        string status_mfa
+        int id_usuario
+    }
+
+    CONTA {
+        int id_conta
+        string numero_conta
+        string status_conta
+        string data_abertura
+        int id_usuario
+    }
+
+    CARTEIRA {
+        int id_carteira
+        string tipo_carteira
+        string status_carteira
+        int id_conta
+    }
+
+    ATIVO_CRIPTO {
+        int id_ativo
+        string nome_ativo
+        string sigla
+        string rede
+    }
+
+    SALDO {
+        int id_saldo
+        float quantidade
+        float valor_atualizado
+        int id_carteira
+        int id_ativo
+    }
+
+    TRANSACAO {
+        int id_transacao
+        string tipo_transacao
+        float valor
+        string data_hora
+        string status_transacao
+        string endereco_origem
+        string endereco_destino
+        int id_conta
+    }
+
+    LOG_AUDITORIA {
+        int id_log
+        string acao
+        string data_hora
+        string descricao
+        int id_transacao
+    }
+
+    ALERTA {
+        int id_alerta
+        string tipo_alerta
+        string nivel_risco
+        string mensagem
+        string data_hora
+        string status_alerta
+        int id_conta
+    }

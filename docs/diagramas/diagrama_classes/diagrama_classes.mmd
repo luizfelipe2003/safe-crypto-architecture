@@ -1,0 +1,97 @@
+classDiagram
+    class PerfilAcesso {
+        +int id_perfil
+        +string nome_perfil
+        +string descricao
+    }
+
+    class Usuario {
+        +int id_usuario
+        +string nome
+        +string email
+        +string senha_hash
+        +string status
+        +string data_criacao
+        +fazerLogin()
+        +consultarSaldo()
+        +consultarHistorico()
+        +realizarDeposito()
+        +realizarSaque()
+    }
+
+    class Autenticacao {
+        +int id_autenticacao
+        +string metodo_mfa
+        +string ultimo_login
+        +string status_mfa
+        +autenticarMFA()
+    }
+
+    class Conta {
+        +int id_conta
+        +string numero_conta
+        +string status_conta
+        +string data_abertura
+        +abrirConta()
+        +consultarSaldo()
+    }
+
+    class Carteira {
+        +int id_carteira
+        +string tipo_carteira
+        +string status_carteira
+        +consultarAtivos()
+    }
+
+    class AtivoCripto {
+        +int id_ativo
+        +string nome_ativo
+        +string sigla
+        +string rede
+    }
+
+    class Saldo {
+        +int id_saldo
+        +float quantidade
+        +float valor_atualizado
+        +atualizarSaldo()
+    }
+
+    class Transacao {
+        +int id_transacao
+        +string tipo_transacao
+        +float valor
+        +string data_hora
+        +string status_transacao
+        +string endereco_origem
+        +string endereco_destino
+        +registrarTransacao()
+    }
+
+    class LogAuditoria {
+        +int id_log
+        +string acao
+        +string data_hora
+        +string descricao
+        +gerarLog()
+    }
+
+    class Alerta {
+        +int id_alerta
+        +string tipo_alerta
+        +string nivel_risco
+        +string mensagem
+        +string data_hora
+        +string status_alerta
+        +gerarAlerta()
+    }
+
+    PerfilAcesso "1" --> "0..*" Usuario : possui
+    Usuario "1" --> "0..*" Conta : possui
+    Usuario "1" --> "0..*" Autenticacao : realiza
+    Conta "1" --> "1" Carteira : possui
+    Carteira "1" --> "0..*" Saldo : registra
+    AtivoCripto "1" --> "0..*" Saldo : compoe
+    Conta "1" --> "0..*" Transacao : realiza
+    Transacao "1" --> "0..*" LogAuditoria : gera
+    Conta "1" --> "0..*" Alerta : gera

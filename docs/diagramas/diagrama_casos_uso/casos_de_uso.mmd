@@ -1,0 +1,29 @@
+flowchart LR
+    U[Usuário]
+
+    UC1((Realizar login))
+    UC2((Autenticar com MFA))
+    UC3((Consultar saldo))
+    UC4((Consultar histórico de transações))
+    UC5((Realizar depósito))
+    UC6((Realizar saque))
+    UC7((Receber alerta de segurança))
+
+    UC8((Registrar transação))
+    UC9((Gerar log de auditoria))
+    UC10((Gerar alerta de risco))
+
+    U --> UC1
+    U --> UC3
+    U --> UC4
+    U --> UC5
+    U --> UC6
+    U --> UC7
+
+    UC1 -. include .-> UC2
+    UC5 -. include .-> UC8
+    UC6 -. include .-> UC8
+    UC5 -. include .-> UC9
+    UC6 -. include .-> UC9
+    UC6 -. extend .-> UC10
+    UC10 -.-> UC7

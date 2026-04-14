@@ -1,0 +1,41 @@
+flowchart TD
+    A([Início]) --> B[Login]
+    B --> C[Validação MFA]
+    C --> D{MFA válido?}
+
+    D -- Não --> E[Falha de autenticação]
+    E --> F([Fim])
+
+    D -- Sim --> G[Acessar conta]
+    G --> H[Escolher operação]
+    H --> I{Operação?}
+
+    I -- Consultar saldo --> J[Exibir saldo]
+    J --> H
+
+    I -- Consultar histórico --> K[Exibir histórico]
+    K --> H
+
+    I -- Depósito --> L[Registrar transação]
+    L --> M[Gerar log]
+    M --> N[Atualizar saldo]
+    N --> O[Confirmar]
+    O --> H
+
+    I -- Saque --> P[Verificar saldo]
+    P --> Q{Saldo suficiente?}
+
+    Q -- Não --> R[Exibir mensagem]
+    R --> H
+
+    Q -- Sim --> S[Registrar transação]
+    S --> T[Gerar log]
+    T --> U[Atualizar saldo]
+    U --> V{Operação de risco?}
+
+    V -- Sim --> W[Gerar alerta]
+    W --> X[Notificar usuário]
+    X --> Y[Confirmar]
+    Y --> H
+
+    V -- Não --> Y

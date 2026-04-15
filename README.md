@@ -7,6 +7,7 @@
 ## Desenvolvedor
 
 **Luiz Felipe Ferraz de Carvalho**
+**Pedro Paulo Costa do Amaral**
 Universidade Católica de Brasília — Disciplina de Arquitetura de Software
 
 ---

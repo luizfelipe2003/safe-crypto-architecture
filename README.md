@@ -4,13 +4,6 @@
 
 ---
 
-## Desenvolvedor
-
-**Luiz Felipe Ferraz de Carvalho**
-Universidade Católica de Brasília — Disciplina de Arquitetura de Software
-
----
-
 ## Sobre o Projeto
 
 O **SafeCrypto** é um protótipo funcional de plataforma de gestão de criptoativos, construído com o objetivo de demonstrar como uma arquitetura bem estruturada pode prevenir os tipos de falhas que levaram ao colapso da **FTX** — uma das maiores exchanges de criptomoedas do mundo.

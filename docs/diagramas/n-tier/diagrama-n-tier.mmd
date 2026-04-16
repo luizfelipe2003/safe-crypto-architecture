@@ -1,0 +1,75 @@
+flowchart TD
+
+    subgraph AP["Camada de Apresentação"]
+        UI["Interface Web / Aplicativo"]
+        Login["Tela de Login"]
+        Dashboard["Painel do Usuário"]
+        Operacoes["Tela de Depósito / Saque / Histórico"]
+        AlertasUI["Tela de Alertas"]
+    end
+
+    subgraph AA["Camada de Aplicação"]
+        AuthService["Serviço de Autenticação"]
+        ContaService["Serviço de Conta"]
+        TransacaoService["Serviço de Transação"]
+        AlertaService["Serviço de Alertas"]
+        AuditoriaService["Serviço de Auditoria"]
+    end
+
+    subgraph AN["Camada de Negócio"]
+        Usuario["Entidade Usuário"]
+        Conta["Entidade Conta"]
+        Carteira["Entidade Carteira"]
+        Saldo["Entidade Saldo"]
+        Transacao["Entidade Transação"]
+        Alerta["Entidade Alerta"]
+        LogAuditoria["Entidade Log de Auditoria"]
+        ValidacaoRisco["Regras de Validação e Risco"]
+        MFA["Validação MFA"]
+    end
+
+    subgraph AD["Camada de Dados"]
+        UsuarioDB["Usuário"]
+        ContaDB["Conta"]
+        CarteiraDB["Carteira"]
+        SaldoDB["Saldo"]
+        TransacaoDB["Transação"]
+        AlertaDB["Alerta"]
+        LogDB["Log_Auditoria"]
+    end
+
+    UI --> Login
+    UI --> Dashboard
+    UI --> Operacoes
+    UI --> AlertasUI
+
+    Login --> AuthService
+    Dashboard --> ContaService
+    Operacoes --> TransacaoService
+    AlertasUI --> AlertaService
+
+    AuthService --> Usuario
+    AuthService --> MFA
+
+    ContaService --> Conta
+    ContaService --> Carteira
+    ContaService --> Saldo
+
+    TransacaoService --> Transacao
+    TransacaoService --> ValidacaoRisco
+    TransacaoService --> Saldo
+
+    AlertaService --> Alerta
+    AuditoriaService --> LogAuditoria
+
+    AuthService --> AuditoriaService
+    TransacaoService --> AuditoriaService
+    ValidacaoRisco --> AlertaService
+
+    Usuario --> UsuarioDB
+    Conta --> ContaDB
+    Carteira --> CarteiraDB
+    Saldo --> SaldoDB
+    Transacao --> TransacaoDB
+    Alerta --> AlertaDB
+    LogAuditoria --> LogDB
